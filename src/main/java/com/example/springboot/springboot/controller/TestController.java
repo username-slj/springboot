@@ -15,7 +15,7 @@ public class TestController {
 
     @RequestMapping(value = "/fingInfo/{name}", method = RequestMethod.GET)
     public String fingInfo(@PathVariable String name) {
-        logger.info("========欢迎========{}", name);
+        logger.info(">>>>>>>>>>>欢迎：{}", name);
         return "hello "+name;
     }
 
