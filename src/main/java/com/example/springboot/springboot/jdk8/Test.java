@@ -12,8 +12,6 @@ public class Test {
 //        test1();
         //无参应用::
 //        test2();
-        System.out.println("=====");
-        System.out.println("=====");
 
 
     }
