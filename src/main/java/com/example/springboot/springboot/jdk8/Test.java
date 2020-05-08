@@ -3,6 +3,7 @@ package com.example.springboot.springboot.jdk8;
 import com.example.springboot.springboot.aop.entity.MyObj;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -12,12 +13,32 @@ public class Test {
 //        test1();
         //无参应用::
 //        test2();
-        System.out.println("909090909");
+        //arrays
+        test2();
 
     }
 
 
+    private static void test2(){
+        String[] strarray={"d","b","c","a"};
+        List<String> abcd = Arrays.asList(strarray);
+        System.out.println("asList数组转list：");
+        abcd.forEach(item ->{
+            System.out.println(item);
+        });
 
+        Arrays.sort(strarray);
+        System.out.print("sort排序：");
+        for(int i=0; i < strarray.length ;i++){
+            System.out.print(strarray[i]);
+        }
+        System.out.println();
+        Arrays.fill(strarray,"a");
+        System.out.print("fill替换数组中所有元素：");
+        for(int i=0; i < strarray.length ;i++){
+            System.out.print(strarray[i]);
+        }
+    }
 
     private static void test1(){
         List list=new ArrayList();
