@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/test", produces = "application/json")
 public class TestController {
-    private static final Logger logger=  LoggerFactory.getLogger(TestController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
     @RequestMapping(value = "/fingInfo/{name}", method = RequestMethod.GET)
     public String fingInfo(@PathVariable String name) {
         logger.info(">>>>>>>>>>>欢迎：{}", name);
-        return "hello "+name;
+        return "hello " + name;
     }
 
 }
