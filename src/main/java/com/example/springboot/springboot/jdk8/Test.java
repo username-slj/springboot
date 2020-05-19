@@ -1,12 +1,13 @@
 package com.example.springboot.springboot.jdk8;
 
-import com.example.springboot.springboot.aop.entity.MyObj;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+@Slf4j
 public class Test {
     public static void main(String[] args) {
         //->写法
@@ -14,7 +15,7 @@ public class Test {
         //无参应用::
 //        test2();
         //arrays
-        test2();
+//        test2();
 
     }
 
