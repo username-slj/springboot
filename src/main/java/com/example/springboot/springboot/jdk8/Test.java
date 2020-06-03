@@ -1,5 +1,6 @@
 package com.example.springboot.springboot.jdk8;
 
+import com.example.springboot.springboot.jdk8.entity.MyEntity;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Test {
 //        test2();
         //arrays
 //        test2();
+
 
     }
 
