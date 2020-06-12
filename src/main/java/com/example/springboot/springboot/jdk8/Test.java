@@ -17,7 +17,12 @@ public class Test {
 //        test2();
         //arrays
 //        test2();
-
+        int i1=10;
+        int i11= i1++;
+        int i2=10;
+        int i22= ++i2;
+        System.out.println(i11);
+        System.out.println(i22);
 
     }
 
