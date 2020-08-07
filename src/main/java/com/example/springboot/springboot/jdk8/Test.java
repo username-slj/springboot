@@ -17,15 +17,21 @@ public class Test {
 //        test2();
         //arrays
 //        test2();
+        //i++先引用在计算，++i先计算在引用
+        test3();
+
+        String Slj_name;
+
+    }
+
+    private static void test3(){
         int i1=10;
         int i11= i1++;
         int i2=10;
         int i22= ++i2;
         System.out.println(i11);
         System.out.println(i22);
-
     }
-
 
     private static void test2(){
         String[] strarray={"d","b","c","a"};
