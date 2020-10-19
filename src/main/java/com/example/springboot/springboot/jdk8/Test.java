@@ -1,6 +1,5 @@
 package com.example.springboot.springboot.jdk8;
 
-import com.example.springboot.springboot.jdk8.entity.MyEntity;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -18,9 +17,11 @@ public class Test {
         //arrays
 //        test2();
         //i++先引用在计算，++i先计算在引用
-        test3();
+//        test3();
+    }
 
-        String Slj_name;
+    private static void test04(){
+
 
     }
 
