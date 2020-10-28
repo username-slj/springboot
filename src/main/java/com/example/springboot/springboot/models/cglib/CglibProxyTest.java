@@ -5,8 +5,7 @@ package com.example.springboot.springboot.models.cglib;
  */
 public class CglibProxyTest {
     public static void main(String[] args) {
-        UserDaoImpl userDao = new UserDaoImpl();
-        UserDaoImpl userDao1= (UserDaoImpl)new ProxyFactory(userDao).getProxyInstance();
+        UserDaoImpl userDao1= (UserDaoImpl)new ProxyFactory(new UserDaoImpl()).getProxyInstance();
         userDao1.toAction();
     }
 }
