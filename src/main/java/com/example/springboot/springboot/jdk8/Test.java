@@ -18,11 +18,44 @@ public class Test {
 //        test2();
         //i++先引用在计算，++i先计算在引用
 //        test3();
+        //== 和 equals
+//        test04();
+        test05();
+    }
+    private static void test05(){
+        System.out.println("".equals("") ? null : "");
     }
 
+
+
+
     private static void test04(){
-
-
+        /**
+         * https://zhuanlan.zhihu.com/p/121603364
+         * ==
+         * 基本数据类型则直接比较其存储的 值是否相等，
+         * 引用类型的变量则比较的是所指向的对象的地址是否相等
+         *
+         *equals 不重写和==相同作用
+         *       重写后比较的是两个对象的值
+         */
+        int sums1=1;
+        int sums2=1;
+        String str1="str1";
+        String str2="str1";
+        String str3=new String("str1");
+        String str4=new String("str1");
+        String str5= str1+str4;
+        String str6= "str1str1";
+        System.out.println(sums1 == sums2);//true
+        System.out.println(str1 == str2);//true
+        System.out.println(str3 == str4);//false
+        System.out.println(str1.equals(str2));//true
+        System.out.println(str3.equals(str4));//true
+        System.out.println(str1.equals(str4));//true
+        System.out.println(str1.equals(str4));//true
+        System.out.println(str5.equals(str6));//true
+        System.out.println(str5 == str6);//false
     }
 
     private static void test3(){
