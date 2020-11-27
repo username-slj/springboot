@@ -1,6 +1,5 @@
-package com.example.springboot.springboot.models.cglib;
+package com.example.springboot.springboot.models.proxy.cglib;
 
-import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -26,9 +25,9 @@ public class ProxyFactory implements MethodInterceptor {
 
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        System.out.println("----------");
+        System.out.println("cglib----------");
         Object invoke = method.invoke(obj, objects);
-        System.out.println("----------");
+        System.out.println("cglib----------");
         return invoke;
     }
 }

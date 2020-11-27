@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.runnable;
+package com.example.springboot.springboot.models.thread.runnable;
 
 /**
  * Runnable

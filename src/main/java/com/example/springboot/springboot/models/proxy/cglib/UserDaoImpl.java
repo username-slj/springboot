@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.cglib;
+package com.example.springboot.springboot.models.proxy.cglib;
 
 public class UserDaoImpl{
 

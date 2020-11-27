@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.dynamicproxy;
+package com.example.springboot.springboot.models.proxy.dynamicproxy;
 
 public class UserDaoImpl implements UserDao {
     @Override

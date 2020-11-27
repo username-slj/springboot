@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.dynamicproxy;
+package com.example.springboot.springboot.models.proxy.dynamicproxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -19,9 +19,9 @@ public class ProxyFactory {
                 new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        System.out.println("----------");
+                        System.out.println("动态代理----------");
                         Object invoke = method.invoke(obj, args);
-                        System.out.println("----------");
+                        System.out.println("动态代理----------");
                         return invoke;
                     }
                 }

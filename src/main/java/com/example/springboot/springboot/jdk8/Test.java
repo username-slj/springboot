@@ -2,6 +2,8 @@ package com.example.springboot.springboot.jdk8;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +25,7 @@ public class Test {
         test05();
     }
     private static void test05(){
-        System.out.println("".equals("") ? null : "");
+
     }
 
 

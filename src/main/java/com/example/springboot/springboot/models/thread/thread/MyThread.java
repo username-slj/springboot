@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.thread;
+package com.example.springboot.springboot.models.thread.thread;
 
 /**
  * Thread
