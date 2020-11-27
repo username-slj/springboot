@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Executors.newScheduledThreadPool(int n)：
- * 创建一个固定线程池，支持定时及周期性任务执行
+ * 创建一个线程池，它可安排在给定延迟后运行命令或者定期地执行
  */
 public class NewScheduledThreadPoolTest {
     public static void main(String[] args) {

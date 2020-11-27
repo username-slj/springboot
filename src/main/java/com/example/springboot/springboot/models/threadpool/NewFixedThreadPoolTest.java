@@ -5,11 +5,11 @@ import java.util.concurrent.Executors;
 
 /**
  * Executors.newFixedThreadPool(int n)：
- * 创建一个固定个数的线程池，以共享的无界队列方式来运行这些线程。
- * 因为线程池大小为为系统资源大小，每个任务输出打印结果后sleep 1秒，所以每1秒打印系统资源数结果。
+ * 创建一个可重用固定线程数的线程池
  */
 public class NewFixedThreadPoolTest {
     public static void main(String[] args) {
+        //获取系统资源大小，创建对应线程数
         int i1 = Runtime.getRuntime().availableProcessors();
         System.out.println("系统资源大小："+ i1);
         ExecutorService executorService = Executors.newFixedThreadPool(i1);
