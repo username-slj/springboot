@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.lock;
+package com.example.springboot.springboot.models.lock.model1;
 
 public class LockTest {
     public static void main(String[] args) {

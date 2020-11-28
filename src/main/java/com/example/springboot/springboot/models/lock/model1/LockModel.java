@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.lock;
+package com.example.springboot.springboot.models.lock.model1;
 
 import lombok.SneakyThrows;
 
