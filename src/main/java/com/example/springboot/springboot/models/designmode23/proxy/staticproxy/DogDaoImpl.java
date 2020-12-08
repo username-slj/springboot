@@ -1,8 +1,5 @@
-package com.example.springboot.springboot.models.proxy.dynamicproxy;
+package com.example.springboot.springboot.models.designmode23.proxy.staticproxy;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class DogDaoImpl implements DogDao {
     @Override
     public void toAction() {

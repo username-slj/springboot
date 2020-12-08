@@ -1,6 +1,4 @@
-package com.example.springboot.springboot.models.proxy.staticproxy;
-
-import com.example.springboot.springboot.models.proxy.staticproxy.DogDao;
+package com.example.springboot.springboot.models.designmode23.proxy.staticproxy;
 
 public class DogProxy implements DogDao {
     private DogDao dogDao;

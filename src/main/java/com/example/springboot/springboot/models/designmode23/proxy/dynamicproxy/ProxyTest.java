@@ -1,8 +1,8 @@
-package com.example.springboot.springboot.models.proxy.dynamicproxy;
+package com.example.springboot.springboot.models.designmode23.proxy.dynamicproxy;
 
 /**
  * 动态代理
- * 优点：代理l类不需要实现接口,但是目标对象一定要实现接口,否则不能用动态代理
+ * 优点：代理类不需要实现接口,但是目标对象一定要实现接口,否则不能用动态代理
  */
 public class ProxyTest {
     public static void main(String[] args) {

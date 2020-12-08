@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.proxy.cglib;
+package com.example.springboot.springboot.models.designmode23.proxy.cglib;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

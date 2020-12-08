@@ -1,8 +1,4 @@
-package com.example.springboot.springboot.models.proxy.staticproxy;
-
-import com.example.springboot.springboot.models.proxy.staticproxy.DogDao;
-import com.example.springboot.springboot.models.proxy.staticproxy.DogDaoImpl;
-import com.example.springboot.springboot.models.proxy.staticproxy.DogProxy;
+package com.example.springboot.springboot.models.designmode23.proxy.staticproxy;
 
 /**
  * 静态代理

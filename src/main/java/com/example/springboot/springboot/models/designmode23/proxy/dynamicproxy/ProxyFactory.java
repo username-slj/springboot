@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.models.proxy.dynamicproxy;
+package com.example.springboot.springboot.models.designmode23.proxy.dynamicproxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
