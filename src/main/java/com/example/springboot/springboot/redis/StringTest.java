@@ -18,15 +18,15 @@ import java.util.Date;
  * 3	getrange key start end 返回 key 中字符串值的子字符
  * 4	getset key value 将给定 key 的值设为 value ，并返回 key 的旧值(old value)。
  * 5	getbit key offset 对 key 所储存的字符串值，获取指定偏移量上的位(bit)。
- * 6	mget key1 [key2..]获取所有(一个或多个)给定 key 的值。
- * 7	setbit key offset value对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)。
- * 8	setex key seconds value将值 value 关联到 key ，并将 key 的过期时间设为 seconds (以秒为单位)。
+ * 6	mget key1 [key2..] 获取所有(一个或多个)给定 key 的值。
+ * 7	setbit key offset value 对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)。
+ * 8	setex key seconds value 将值 value 关联到 key ，并将 key 的过期时间设为 seconds (以秒为单位)。
  * 9	setnx key value只有在 key 不存在时设置 key 的值。
- * 10	setrange key offset value用 value 参数覆写给定 key 所储存的字符串值，从偏移量 offset 开始。
+ * 10	setrange key offset value 用 value 参数覆写给定 key 所储存的字符串值，从偏移量 offset 开始。
  * 11	strlen key返回 key 所储存的字符串值的长度。
- * 12	mset key value [key value ...]同时设置一个或多个 key-value 对。
- * 13	msetnx key value [key value ...]同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在。
- * 14	psetex key milliseconds value这个命令和 SETEX 命令相似，但它以毫秒为单位设置 key 的生存时间，而不是像 SETEX 命令那样，以秒为单位。
+ * 12	mset key value [key value ...] 同时设置一个或多个 key-value 对。
+ * 13	msetnx key value [key value ...] 同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在。
+ * 14	psetex key milliseconds value 这个命令和 SETEX 命令相似，但它以毫秒为单位设置 key 的生存时间，而不是像 SETEX 命令那样，以秒为单位。
  * 15	incr key将 key 中储存的数字值增一。
  * 16	incrby key increment将 key 所储存的值加上给定的增量值（increment） 。
  * 17	incrbyfloat key increment将 key 所储存的值加上给定的浮点增量值（increment） 。
