@@ -12,7 +12,7 @@ import redis.clients.jedis.Jedis;
 import java.io.*;
 import java.util.Date;
 
-/**
+/**https://blog.csdn.net/qq_36290794/article/details/78430355
  * 1	SET key value  * 设置指定 key 的值
  * 2	GET key  * 获取指定 key 的值。
  * 3	GETRANGE key start end  * 返回 key 中字符串值的子字符

@@ -5,7 +5,7 @@ import redis.clients.jedis.Jedis;
 import java.util.Map;
 import java.util.Set;
 
-/**
+/**https://blog.csdn.net/qq_36290794/article/details/78430355
  * 1	HDEL key field1 [field2] * 删除一个或多个哈希表字段
  * 2	HEXISTS key field  * 查看哈希表 key 中，指定的字段是否存在。
  * 3	HGET key field  * 获取存储在哈希表中指定字段的值。
