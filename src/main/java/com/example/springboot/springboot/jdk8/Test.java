@@ -1,13 +1,16 @@
 package com.example.springboot.springboot.jdk8;
 
+import com.example.springboot.springboot.jdk8.entity.MyCurrency;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class Test {
@@ -25,14 +28,29 @@ public class Test {
         test05();
     }
     private static void test05(){
+        List<MyCurrency> list=new ArrayList<>();
+        MyCurrency myCurrency1 = new MyCurrency();
+        myCurrency1.setType("28");
+        myCurrency1.setTimes(new Date());
+        list.add(myCurrency1);
 
+        MyCurrency myCurrency2 = new MyCurrency();
+        myCurrency2.setType("24");
+        myCurrency2.setTimes(new Date());
+        list.add(myCurrency2);
 
+        MyCurrency myCurrency3 = new MyCurrency();
+        myCurrency3.setType("26");
+        myCurrency3.setTimes(new Date());
+        list.add(myCurrency3);
 
-
-
-
+        list = list.stream().filter(stmt -> (!"28".equals(stmt.getType()) && !"24".equals(stmt.getType()))).collect(Collectors.toList());
+        for(MyCurrency myCurrency : list){
+            System.out.println("======"+myCurrency.getType());
+        }
 
     }
+
 
 
 
