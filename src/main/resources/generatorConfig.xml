@@ -14,7 +14,7 @@
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <!-- connectionURL="jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC"-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/mydata?characterEncoding=utf-8"
+                        connectionURL="jdbc:mysql://localhost:3306/mydata?serverTimezone=GMT%2B8"
                         userId="root"
                         password="root">
         </jdbcConnection>
@@ -25,24 +25,22 @@
         </javaTypeResolver>
 
         <!-- targetProject:生成POJO类的位置 -->
-        <javaModelGenerator targetPackage="com.example.springboot.springboot.redis.entity"
-                            targetProject="K:\object\springboot\src\main\java\">
-            <property name="enableSubPackages" value="false"/>
+        <javaModelGenerator targetPackage="com.example.springboot.springboot.springbootmodel.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- targetProject:mapper映射文件生成的位置-->
-        <sqlMapGenerator targetPackage="com.example.springboot.springboot.redis.mapper"
-                         targetProject="K:\object\springboot\src\main\java\">
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- targetPackage：dao接口生成的位置 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.example.springboot.springboot.redis.dao"
-                             targetProject="K:\object\springboot\src\main\java\">
+                             targetPackage="com.example.springboot.springboot.springbootmodel.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 指定数据库表  多个表示,可用多个table标签-->
-        <table tableName="item" domainObjectName="Item"
+<!--        <table tableName="user" domainObjectName="User"-->
+        <table tableName="s_user" domainObjectName="SUser"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
