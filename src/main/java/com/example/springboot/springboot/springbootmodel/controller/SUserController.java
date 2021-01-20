@@ -25,6 +25,12 @@ public class SUserController {
     @Resource
     private SUserMapper sUserMapper;
 
+    @ApiOperation(value = "hello")
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String hello(){
+        throw new RuntimeException();
+    }
+
     @ApiOperation(value = "用户新增")
     @RequestMapping(value = "/addSUser/{id}/{username}/{password}", method = RequestMethod.GET)
     public void addSUser(@ApiParam("id") @RequestParam("id") String id,
