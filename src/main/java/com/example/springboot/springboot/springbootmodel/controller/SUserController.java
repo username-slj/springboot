@@ -27,8 +27,9 @@ public class SUserController {
 
     @ApiOperation(value = "hello")
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello(){
-        throw new RuntimeException();
+    public String hello() throws Exception {
+        int i= 10/0;
+        return "ssss";
     }
 
     @ApiOperation(value = "用户新增")

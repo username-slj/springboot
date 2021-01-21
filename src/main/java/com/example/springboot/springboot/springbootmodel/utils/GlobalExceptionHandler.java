@@ -19,11 +19,11 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
-    public Map<String, String> defultErrorHandler(HttpRequestHandler req, Exception e) throws Exception {
-        Map<String, String> map = new HashMap<>(6);
-        map.put("code", "400");
-        map.put("message", "全局异常");
-        map.put("data", "");
-        return map;
+    public Object defultErrorHandler(Exception e, HttpRequestHandler req) throws Exception {
+//        Map<String, String> map = new HashMap<>(6);
+//        map.put("code", "400");
+//        map.put("message", "全局异常");
+//        map.put("data", "");
+        return "全局异常"+e.getMessage();
     }
 }
