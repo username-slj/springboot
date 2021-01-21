@@ -19,7 +19,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
-    public Object defultErrorHandler(Exception e, HttpRequestHandler req) throws Exception {
+    public Object defultErrorHandler(Exception e) throws Exception {
 //        Map<String, String> map = new HashMap<>(6);
 //        map.put("code", "400");
 //        map.put("message", "全局异常");
