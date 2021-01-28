@@ -1,8 +1,11 @@
 package com.example.springboot.springboot.jdk8;
 
+import com.example.springboot.springboot.jdk8.entity.A;
+import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.MyCurrency;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.sound.midi.Soundbank;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -28,7 +31,26 @@ public class Test {
         test05();
     }
     private static void test05(){
-        System.out.println(new BigDecimal(1));
+        A a1 = new A();
+        a1.setUniqueNo(111l);
+        a1.setStatus("01");
+        List<A> listA=new ArrayList<>();
+        listA.add(a1);
+
+        a1 = new A();
+        a1.setUniqueNo(111l);
+        a1.setStatus("01");
+        listA.add(a1);
+        a1 = new A();
+        a1.setUniqueNo(222l);
+        a1.setStatus("02");
+        listA.add(a1);
+
+        for(A a : listA){
+            System.out.println(a.getUniqueNo()+"==="+a.getStatus());
+
+        }
+
 
     }
 
@@ -108,3 +130,28 @@ public class Test {
         consumer.accept("lisi");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
