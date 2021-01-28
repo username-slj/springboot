@@ -22,6 +22,7 @@ public class CallableTest {
         thread.start();
 
         try {
+            //拿到返回值
             Object obj = futureTask.get();
             System.out.println(Thread.currentThread().getName()+":::"+ obj);
         } catch (InterruptedException e) {
