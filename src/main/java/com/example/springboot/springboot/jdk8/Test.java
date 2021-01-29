@@ -2,6 +2,7 @@ package com.example.springboot.springboot.jdk8;
 
 import com.example.springboot.springboot.jdk8.entity.A;
 import com.example.springboot.springboot.jdk8.entity.B;
+import com.example.springboot.springboot.jdk8.entity.LossPartyDto;
 import com.example.springboot.springboot.jdk8.entity.MyCurrency;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
@@ -30,61 +31,104 @@ public class Test {
     }
 
     private static void test05() {
+
+
+        List<LossPartyDto> lossPartyDtoList1 = new ArrayList<>();
+        List<LossPartyDto> lossPartyDtoList2 = new ArrayList<>();
+        List<LossPartyDto> lossPartyDtoList3 = new ArrayList<>();
+
         List<A> listA = new ArrayList<>();
-        List<B> listB = new ArrayList<>();
-        List<B> list = new ArrayList();
-        Set<B> staffsSet = new HashSet<>();
+        List<A> listB = new ArrayList<>();
 
         A a1 = new A();
         a1.setUniqueNo(1l);
         a1.setStatus("01");
+        a1.setName("1111111111111zhangsan");
         listA.add(a1);
 
         a1 = new A();
         a1.setUniqueNo(2l);
-        a1.setStatus("00");
+        a1.setStatus("01");
+        a1.setName("11111111111list");
         listA.add(a1);
+        LossPartyDto lossPartyDto1 = new LossPartyDto();
+        lossPartyDto1.setUniqueNo(001l);
+        lossPartyDto1.setAList(listA);
+        lossPartyDtoList1.add(lossPartyDto1);
 
-        B b = new B();
+//////////////////////////////////////////////////////////////////////////////////
+        A b = new A();
         b.setUniqueNo(1l);
         b.setStatus("01");
+        b.setName("22222222222");
         listB.add(b);
 
-        b = new B();
+        b = new A();
         b.setUniqueNo(3l);
         b.setStatus("00");
+        b.setName("2222222222jjjjj");
         listB.add(b);
 
-        b = new B();
+        b = new A();
         b.setUniqueNo(4l);
         b.setStatus("00");
+        b.setName("222222222ddddd");
         listB.add(b);
 
-        b = new B();
+        b = new A();
         b.setUniqueNo(5l);
         b.setStatus("00");
+        b.setName("222222222ssssss");
         listB.add(b);
+        LossPartyDto lossPartyDto2 = new LossPartyDto();
+        lossPartyDto2.setUniqueNo(001l);
+        lossPartyDto2.setAList(listB);
+        lossPartyDtoList2.add(lossPartyDto2);
 
-        for (A alist : listA) {
-            for (B blist : listB) {
-                Long uniqueNo = alist.getUniqueNo() == null ? 0l : alist.getUniqueNo();
-                if (uniqueNo.equals(blist.getUniqueNo())) {
-                    if ("01".equals(alist.getStatus()) || "02".equals(alist.getStatus())) {
-                        list.add(blist);
-                    }
-                } else {
-                    for (B bblist : list) {
-                        if (!bblist.getUniqueNo().equals(blist.getUniqueNo())) {
-                            staffsSet.add(blist);
-                            break;
+        lossPartyDto2 = new LossPartyDto();
+        lossPartyDto2.setUniqueNo(003l);
+        lossPartyDto2.setAList(listB);
+        lossPartyDtoList2.add(lossPartyDto2);
+
+        LossPartyDto lossPartyDtoResult;
+        Map<Long, A> map = new HashMap<>();
+        Map<Long, LossPartyDto> lossPartyDtoMap = new HashMap<>();
+        for (LossPartyDto lossPartyDto : lossPartyDtoList1) {
+            Long uniqueNo = lossPartyDto.getUniqueNo() == null ? 0l : lossPartyDto.getUniqueNo();
+            lossPartyDtoMap.put(lossPartyDto.getUniqueNo(), lossPartyDto);
+            for (LossPartyDto newLossPartyDto : lossPartyDtoList2) {
+                Long newUniqueNo = newLossPartyDto.getUniqueNo() == null ? 0l : newLossPartyDto.getUniqueNo();
+                if (uniqueNo.equals(newUniqueNo)) {
+                    //比较
+                    List<A> aList1 = lossPartyDto.getAList();
+                    List<A> aList2 = newLossPartyDto.getAList();
+                    for (A list1 : aList1) {
+                        if ("01".equals(list1.getStatus()) || "02".equals(list1.getStatus())) {
+                            map.put(list1.getUniqueNo(), list1);
+                        }
+                        for (A list2 : aList2) {
+                            map.put(list2.getUniqueNo(), list2);
                         }
                     }
+                    List<A> list12 = new ArrayList<>(map.values());
+                    lossPartyDtoResult=new LossPartyDto();
+                    lossPartyDtoResult.setAList(list12);
+                    lossPartyDtoResult.setUniqueNo(newLossPartyDto.getUniqueNo());
+                }else {
+                    //beanutils.copy(newLossPartyDto, lossPartyDtoResult)
+                    lossPartyDtoResult=new LossPartyDto();
+                    lossPartyDtoResult.setAList(newLossPartyDto.getAList());
+                    lossPartyDtoResult.setUniqueNo(newLossPartyDto.getUniqueNo());
                 }
+                lossPartyDtoList3.add(lossPartyDtoResult);
             }
         }
 
-        for (B bbb : list) {
-            System.out.println("===" + bbb.getUniqueNo() + "===" + bbb.getStatus());
+        for (LossPartyDto bbb : lossPartyDtoList3) {
+            System.out.println("===" + bbb.getUniqueNo() + "==="+ bbb.getAList().size());
+            for(A a :bbb.getAList()){
+                System.out.println("---"+ a.getUniqueNo()+"---"+a.getStatus()+"---"+a.getName());
+            }
         }
     }
 
