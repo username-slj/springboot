@@ -1,0 +1,35 @@
+/*
+----------------------lossPartyDtoList1理赔转换前--
+lossPartyDtoList        ===1===2
+lossPartyDtoItemList    ---1---01---1111111111111zhangsan
+lossPartyDtoItemList    ---2---01---11111111111list
+lossPartyDtoList        ===2===2
+lossPartyDtoItemList    ---3---01---1111111111111zhangsan
+lossPartyDtoItemList    ---4---01---11111111111list
+----------------------lossPartyDtoList2公估系统转换前
+lossPartyDtoList        ===1===4
+lossPartyDtoItemList    ---1---00---22222222222
+lossPartyDtoItemList    ---3---00---2222222222jjjjj
+lossPartyDtoItemList    ---4---00---222222222ddddd
+lossPartyDtoItemList    ---5---00---222222222ssssss
+lossPartyDtoList        ===3===4
+lossPartyDtoItemList    ---3---00---22222222222
+lossPartyDtoItemList    ---4---00---2222222222jjjjj
+lossPartyDtoItemList    ---5---00---222222222ddddd
+lossPartyDtoItemList    ---6---00---222222222ssssss
+------------------------------------结果
+lossPartyDtoList===1===2
+lossPartyDtoItemList    ---1---01---22222222222
+lossPartyDtoItemList    ---2---01---11111111111list
+lossPartyDtoItemList    ---3---00---2222222222jjjjj
+lossPartyDtoItemList    ---4---00---222222222ddddd
+lossPartyDtoItemList    ---5---00---222222222ssssss
+lossPartyDtoList===2===2
+lossPartyDtoItemList    ---3---01---1111111111111zhangsan
+lossPartyDtoItemList    ---4---01---11111111111list
+lossPartyDtoList===3===4
+lossPartyDtoItemList    ---3---00---22222222222
+lossPartyDtoItemList    ---4---00---2222222222jjjjj
+lossPartyDtoItemList    ---5---00---222222222ddddd
+lossPartyDtoItemList    ---6---00---222222222ssssss
+*/

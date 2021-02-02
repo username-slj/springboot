@@ -1,18 +1,11 @@
 package com.example.springboot.springboot.jdk8;
 
-import com.example.springboot.springboot.jdk8.entity.A;
-import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.LossPartyDto;
-import com.example.springboot.springboot.jdk8.entity.MyCurrency;
+import com.example.springboot.springboot.jdk8.entity.LossPartyDtoItem;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 
-import javax.sound.midi.Soundbank;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 @Slf4j
 public class Test {
@@ -31,9 +24,186 @@ public class Test {
     }
 
     private static void test05() {
-
-
         List<LossPartyDto> lossPartyDtoList1 = new ArrayList<>();
+        List<LossPartyDto> lossPartyDtoList2 = new ArrayList<>();
+        List<LossPartyDto> lossPartyDtoList3 = new ArrayList<>();
+
+        List<LossPartyDtoItem> lossPartyDtoItemArrayList1 = new ArrayList<>();
+        List<LossPartyDtoItem> lossPartyDtoItemArrayList2 = new ArrayList<>();
+
+        LossPartyDtoItem a1 = new LossPartyDtoItem();
+        a1.setUniqueNo(1l);
+        a1.setStatus("01");
+        a1.setName("1111111111111zhangsan");
+        lossPartyDtoItemArrayList1.add(a1);
+
+        a1 = new LossPartyDtoItem();
+        a1.setUniqueNo(2l);
+        a1.setStatus("01");
+        a1.setName("11111111111list");
+        lossPartyDtoItemArrayList1.add(a1);
+        LossPartyDto lossPartyDto1 = new LossPartyDto();
+        lossPartyDto1.setUniqueNo(001l);
+        lossPartyDto1.setLossPartyDtoItemList(lossPartyDtoItemArrayList1);
+        lossPartyDtoList1.add(lossPartyDto1);
+
+        lossPartyDtoItemArrayList1 = new ArrayList<>();
+        a1 = new LossPartyDtoItem();
+        a1.setUniqueNo(3l);
+        a1.setStatus("01");
+        a1.setName("1111111111111zhangsan");
+        lossPartyDtoItemArrayList1.add(a1);
+
+        a1 = new LossPartyDtoItem();
+        a1.setUniqueNo(4l);
+        a1.setStatus("01");
+        a1.setName("11111111111list");
+        lossPartyDtoItemArrayList1.add(a1);
+        LossPartyDto lossPartyDto2 = new LossPartyDto();
+        lossPartyDto2.setUniqueNo(002l);
+        lossPartyDto2.setLossPartyDtoItemList(lossPartyDtoItemArrayList1);
+        lossPartyDtoList1.add(lossPartyDto2);
+
+//////////////////////////////////////////////////////////////////////////////////
+        LossPartyDtoItem b = new LossPartyDtoItem();
+        b.setUniqueNo(1l);
+        b.setStatus("00");
+        b.setName("22222222222");
+        lossPartyDtoItemArrayList2.add(b);
+
+        b = new LossPartyDtoItem();
+        b.setUniqueNo(3l);
+        b.setStatus("00");
+        b.setName("2222222222jjjjj");
+        lossPartyDtoItemArrayList2.add(b);
+
+        b = new LossPartyDtoItem();
+        b.setUniqueNo(4l);
+        b.setStatus("00");
+        b.setName("222222222ddddd");
+        lossPartyDtoItemArrayList2.add(b);
+
+        b = new LossPartyDtoItem();
+        b.setUniqueNo(5l);
+        b.setStatus("00");
+        b.setName("222222222ssssss");
+        lossPartyDtoItemArrayList2.add(b);
+        LossPartyDto lossPartyDto212 = new LossPartyDto();
+        lossPartyDto212.setUniqueNo(001l);
+        lossPartyDto212.setLossPartyDtoItemList(lossPartyDtoItemArrayList2);
+        lossPartyDtoList2.add(lossPartyDto212);
+
+        //////////////////////////////////////////////////////////////////
+        lossPartyDtoItemArrayList2 = new ArrayList<>();
+        b = new LossPartyDtoItem();
+        b.setUniqueNo(3l);
+        b.setStatus("00");
+        b.setName("22222222222");
+        lossPartyDtoItemArrayList2.add(b);
+
+        b = new LossPartyDtoItem();
+        b.setUniqueNo(4l);
+        b.setStatus("00");
+        b.setName("2222222222jjjjj");
+        lossPartyDtoItemArrayList2.add(b);
+
+        b = new LossPartyDtoItem();
+        b.setUniqueNo(5l);
+        b.setStatus("00");
+        b.setName("222222222ddddd");
+        lossPartyDtoItemArrayList2.add(b);
+
+        b = new LossPartyDtoItem();
+        b.setUniqueNo(6l);
+        b.setStatus("00");
+        b.setName("222222222ssssss");
+        lossPartyDtoItemArrayList2.add(b);
+        lossPartyDto2 = new LossPartyDto();
+        lossPartyDto2.setUniqueNo(003l);
+        lossPartyDto2.setLossPartyDtoItemList(lossPartyDtoItemArrayList2);
+        lossPartyDtoList2.add(lossPartyDto2);
+
+        Map<Long, LossPartyDto> longLossPartyDtoMap=new HashMap<>();
+        Map<Long, LossPartyDtoItem> longLossPartyDtoItemMap=new HashMap<>();
+        List<LossPartyDto> partyDtoArrayList=new ArrayList<>();
+        LossPartyDto lossPartyDto4 = new LossPartyDto();
+        String uniqueNo="";
+        //理赔
+        for(LossPartyDto lossPartyDto : lossPartyDtoList1){
+            List<LossPartyDtoItem> lossPartyDtoItemList = lossPartyDto.getLossPartyDtoItemList();
+            //公估系统
+            for(LossPartyDto newLossPartyDto : lossPartyDtoList2) {
+                List<LossPartyDtoItem> newLossPartyDtoItemList = newLossPartyDto.getLossPartyDtoItemList();
+                for(LossPartyDtoItem lossPartyDtoItem : lossPartyDtoItemList){
+                    if("01".equals(lossPartyDtoItem.getStatus())|| "02".equals(lossPartyDtoItem.getStatus())){
+                        longLossPartyDtoItemMap.put(lossPartyDtoItem.getUniqueNo(), lossPartyDtoItem);
+                    }
+                    for(LossPartyDtoItem newLossPartyDtoItem : newLossPartyDtoItemList){
+                        longLossPartyDtoItemMap.put(newLossPartyDtoItem.getUniqueNo(), newLossPartyDtoItem);
+                    }
+                }
+                List<LossPartyDtoItem> lossPartyDtoItemArrayList = new ArrayList<>(longLossPartyDtoItemMap.values());
+                lossPartyDto4.setLossPartyDtoItemList(lossPartyDtoItemArrayList);
+                lossPartyDto4.setUniqueNo(newLossPartyDto.getUniqueNo());
+                longLossPartyDtoMap.put(lossPartyDto4.getUniqueNo(), lossPartyDto4);
+            }
+        }
+
+        List<LossPartyDto> lossPartyDtosResult = new ArrayList<>(longLossPartyDtoMap.values());
+        for (LossPartyDto lossPartyDtoResult : lossPartyDtosResult) {
+            log.info("===" + lossPartyDtoResult.getUniqueNo() + "===" + lossPartyDtoResult.getLossPartyDtoItemList().size());
+            List<LossPartyDtoItem> lossPartyDtoItemList = lossPartyDtoResult.getLossPartyDtoItemList();
+            for (LossPartyDtoItem lossPartyDtoItem : lossPartyDtoItemList) {
+                log.info("---" + lossPartyDtoItem.getUniqueNo() + "---" + lossPartyDtoItem.getStatus() + "---" + lossPartyDtoItem.getName());
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        log.info("----------------------lossPartyDtoList1理赔转换前------------------------");
+//        for (LossPartyDto lossPartyDto : lossPartyDtoList1) {
+//            log.info("===" + lossPartyDto.getUniqueNo() + "===" + lossPartyDto.getLossPartyDtoItemList().size());
+//            List<LossPartyDtoItem> lossPartyDtoItemList = lossPartyDto.getLossPartyDtoItemList();
+//            for (LossPartyDtoItem lossPartyDtoItem : lossPartyDtoItemList) {
+//                log.info("---" + lossPartyDtoItem.getUniqueNo() + "---" + lossPartyDtoItem.getStatus() + "---" + lossPartyDtoItem.getName());
+//            }
+//        }
+//        log.info("----------------------lossPartyDtoList2公估系统转换前------------------------");
+//        for (LossPartyDto lossPartyDtoResult : lossPartyDtoList2) {
+//            log.info("===" + lossPartyDtoResult.getUniqueNo() + "===" + lossPartyDtoResult.getLossPartyDtoItemList().size());
+//            List<LossPartyDtoItem> lossPartyDtoItemList = lossPartyDtoResult.getLossPartyDtoItemList();
+//            for (LossPartyDtoItem lossPartyDtoItem : lossPartyDtoItemList) {
+//                log.info("---" + lossPartyDtoItem.getUniqueNo() + "---" + lossPartyDtoItem.getStatus() + "---" + lossPartyDtoItem.getName());
+//            }
+//        }
+
+
+
+
+
+
+
+
+
+        /*List<LossPartyDto> lossPartyDtoList1 = new ArrayList<>();
         List<LossPartyDto> lossPartyDtoList2 = new ArrayList<>();
         List<LossPartyDto> lossPartyDtoList3 = new ArrayList<>();
 
@@ -59,7 +229,7 @@ public class Test {
 //////////////////////////////////////////////////////////////////////////////////
         A b = new A();
         b.setUniqueNo(1l);
-        b.setStatus("01");
+        b.setStatus("00");
         b.setName("22222222222");
         listB.add(b);
 
@@ -129,7 +299,7 @@ public class Test {
             for(A a :bbb.getAList()){
                 System.out.println("---"+ a.getUniqueNo()+"---"+a.getStatus()+"---"+a.getName());
             }
-        }
+        }*/
     }
 
 

@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class LossPartyDto {
     private Long uniqueNo;
-    private List<A> aList;
+    private List<LossPartyDtoItem> lossPartyDtoItemList;
 }
