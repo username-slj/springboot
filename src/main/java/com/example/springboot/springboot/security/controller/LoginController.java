@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
  * https://blog.csdn.net/qq_42640067/article/details/113062222
  */
 @Api("security")
-@RestController
+@RestController(value = "/security")
 public class LoginController {
 
-    @ApiOperation(value = "登陆", notes = "")
+    @ApiOperation(value = "登陆")
     @RequestMapping("/login")
     public String login() {
         return "redirect:main.html";
