@@ -4,6 +4,7 @@ import com.example.springboot.springboot.jdk8.entity.LossPartyDto;
 import com.example.springboot.springboot.jdk8.entity.LossPartyDtoItem;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -24,6 +25,7 @@ public class Test {
     }
 
     private static void test05() {
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
 
     }
 
@@ -47,10 +49,10 @@ public class Test {
         String str6 = "str1str1";
         System.out.println(sums1 == sums2);//true
         System.out.println(str1 == str2);//true
-        System.out.println(str3 == str4);//false
+        System.out.println(str3 == str4);//false 指向的地址不同
         System.out.println(str1.equals(str2));//true
-        System.out.println(str3.equals(str4));//true
-        System.out.println(str1.equals(str4));//true
+        System.out.println(str3.equals(str4));//true 地址不同值一样
+        System.out.println(str1.equals(str4));//true 同上
         System.out.println(str1.equals(str4));//true
         System.out.println(str5.equals(str6));//true
         System.out.println(str5 == str6);//false
