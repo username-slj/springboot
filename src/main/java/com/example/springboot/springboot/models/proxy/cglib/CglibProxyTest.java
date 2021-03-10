@@ -1,7 +1,7 @@
 package com.example.springboot.springboot.models.proxy.cglib;
 /**
- * cglib
- * 优点：目标对象没有实现接口,用Cglib代理
+ * cglib：目标对象不需要实现接口，只是一个单独类
+ *       （UserDaoImpl单独一个普通类，没有实现任何接口的）
  */
 public class CglibProxyTest {
     public static void main(String[] args) {

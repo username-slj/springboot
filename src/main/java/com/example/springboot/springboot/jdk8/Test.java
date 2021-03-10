@@ -1,10 +1,7 @@
 package com.example.springboot.springboot.jdk8;
 
-import com.example.springboot.springboot.jdk8.entity.LossPartyDto;
-import com.example.springboot.springboot.jdk8.entity.LossPartyDtoItem;
 import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -25,7 +22,6 @@ public class Test {
     }
 
     private static void test05() {
-        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
 
     }
 
