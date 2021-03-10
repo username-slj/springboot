@@ -1,8 +1,12 @@
 package com.example.springboot.springboot.jdk8;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 @Slf4j
@@ -18,11 +22,57 @@ public class Test {
 //        test3();
         //== 和 equals
 //        test04();
-        test05();
+//        jdk8循环非空判断
+//        test05();
+//        jdk8的forEach不能使用break,continue, 可以使用return代替continue（return和continue是一样的效果）
+//        test06();
+
+        test07();
+    }
+
+    private static void test07() {
+        String str="123";
+        String sb=new String("123");//true
+        StringBuffer sb1=new StringBuffer();//false
+        sb1.append("123");
+        StringBuilder sb2=new StringBuilder("123");//true
+        System.out.println(str.equals(sb));
+
+
+
+    }
+
+    private static void test06() {
+        List<String> list = new ArrayList<>();
+        list.add("112");
+        list.add("1133");
+        list.add("115555");
+
+        Optional.ofNullable(list).orElse(new ArrayList<>()).forEach(s -> {
+            if(s.length() == 4){
+                return;
+            }
+            System.out.println(s);
+        });
     }
 
     private static void test05() {
-
+//        List<String> list = null;
+        List<String> list = new ArrayList<>();
+        list.add("11111");
+        list.add("22222");
+        list.add("33333");
+        //普通写法
+        if (!CollectionUtils.isEmpty(list)) {
+            for (String str : list) {
+                System.out.println(str);
+                continue;
+            }
+        }
+        //jdk8写法
+        Optional.ofNullable(list).orElse(new ArrayList<>()).forEach(o -> {
+            System.out.println(o);
+        });
     }
 
     private static void test04() {
@@ -34,6 +84,7 @@ public class Test {
          *
          *equals 不重写和==相同作用
          *       重写后比较的是两个对象的值
+         *       https://www.cnblogs.com/fangfuhai/p/5500065.html
          */
         int sums1 = 1;
         int sums2 = 1;
@@ -46,12 +97,12 @@ public class Test {
         System.out.println(sums1 == sums2);//true
         System.out.println(str1 == str2);//true
         System.out.println(str3 == str4);//false 指向的地址不同
+        System.out.println(str5 == str6);//false
         System.out.println(str1.equals(str2));//true
         System.out.println(str3.equals(str4));//true 地址不同值一样
         System.out.println(str1.equals(str4));//true 同上
         System.out.println(str1.equals(str4));//true
         System.out.println(str5.equals(str6));//true
-        System.out.println(str5 == str6);//false
     }
 
     private static void test3() {
