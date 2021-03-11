@@ -30,16 +30,24 @@ public class Test {
 //        test05();
 //        jdk8的forEach不能使用break,continue, 可以使用return代替continue（return和continue是一样的效果）
 //        test06();
+//          字符串内存模型
+//        test07();
+        test08();
+    }
 
-        test07();
+    private static void test08(){
+
     }
 
     private static void test07() {
+        //String是不可变的，“1”符号保存先判断常量池三方存在1，存在1就返回1的引用，不存在就保存后返回引用
+        //new String("1") 首先在常量池中判断是否存在1存在就在堆中开辟一块内存存放1，返回堆内存引用
+        //                不存在就在常量池中存放，在在堆内存中开辟一块内存存放返回堆内存的引用
         String a="1";
         String b="1";
         //引用类型+字符串属于运行时创建（a存放在常量池中，“”存放常量池中是两块所以引用地址不一样）
         System.out.println(a+"" == b);
-        //字符串量直接保存在常量池中
+        //字符串量直接保存在常量池中，“1”不是引用类型直接相加“”所以最后引用是一样
         System.out.println("1"+"" == b);
     }
 
