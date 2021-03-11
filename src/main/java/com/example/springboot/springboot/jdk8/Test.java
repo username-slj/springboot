@@ -1,7 +1,11 @@
 package com.example.springboot.springboot.jdk8;
 
+import com.example.springboot.springboot.jdk8.entity.A;
+import com.example.springboot.springboot.jdk8.entity.B;
+import com.example.springboot.springboot.jdk8.entity.MyEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,15 +35,12 @@ public class Test {
     }
 
     private static void test07() {
-        String str="123";
-        String sb=new String("123");//true
-        StringBuffer sb1=new StringBuffer();//false
-        sb1.append("123");
-        StringBuilder sb2=new StringBuilder("123");//true
-        System.out.println(str.equals(sb));
-
-
-
+        String a="1";
+        String b="1";
+        //引用类型+字符串属于运行时创建（a存放在常量池中，“”存放常量池中是两块所以引用地址不一样）
+        System.out.println(a+"" == b);
+        //字符串量直接保存在常量池中
+        System.out.println("1"+"" == b);
     }
 
     private static void test06() {
