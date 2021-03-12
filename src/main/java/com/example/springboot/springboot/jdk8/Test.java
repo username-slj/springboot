@@ -1,9 +1,12 @@
 package com.example.springboot.springboot.jdk8;
 
 import com.example.springboot.springboot.jdk8.entity.A;
+import com.example.springboot.springboot.jdk8.entity.A2;
 import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.MyEntity;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.core.util.JsonUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -32,10 +35,45 @@ public class Test {
 //        test06();
 //          字符串内存模型
 //        test07();
-        test08();
+//        BeanUtils.copyProperties
+//        test08();
+//        list(BO)转List(BO):硬编码
+//        test09();
+        test10();
+    }
+
+    private static void test10() {
+
+
+    }
+
+    private static void test09(){
+        A a = new A();
+        a.setName("lisi");
+        a.setStatus("1");
+        a.setUniqueNo(000002l);
+        List<A> aList=new ArrayList<>();
+        aList.add(a);
+
+        A2 a2 = new A2();
+        List<A2> a2List=new ArrayList<>();
+        if(!CollectionUtils.isEmpty(aList)){
+            for(A aLists : aList){
+                BeanUtils.copyProperties(aLists, a2);
+                a2List.add(a2);
+            }
+            System.out.println(a2List.get(0).getName()+"==="+a2List.get(0).getStatus()+"==="+a2List.get(0).getUniqueNo());
+        }
     }
 
     private static void test08(){
+        A a = new A();
+        a.setName("zhangsan");
+        a.setStatus("2");
+        a.setUniqueNo(0000001l);
+        A2 a2 = new A2();
+        BeanUtils.copyProperties(a, a2);
+        System.out.println("==="+a2.getName()+"==="+a2.getStatus()+"==="+a2.getUniqueNo());
 
     }
 
