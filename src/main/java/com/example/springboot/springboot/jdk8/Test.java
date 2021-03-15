@@ -1,5 +1,6 @@
 package com.example.springboot.springboot.jdk8;
 
+import com.example.springboot.springboot.common.Utils;
 import com.example.springboot.springboot.jdk8.entity.A;
 import com.example.springboot.springboot.jdk8.entity.A2;
 import com.example.springboot.springboot.jdk8.entity.B;
@@ -39,12 +40,22 @@ public class Test {
 //        test08();
 //        list(BO)转List(BO):硬编码
 //        test09();
-        test10();
+//        对象转json
+//        test10();
+    }
+
+    private static void test11() {
+
+
+
+
     }
 
     private static void test10() {
-
-
+        A a=new A();
+        a.setUniqueNo(111l);
+        a.setName("zhangsan");
+        System.out.println(Utils.objectToJson(null));
     }
 
     private static void test09(){
