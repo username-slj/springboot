@@ -47,6 +47,7 @@ public class Test {
 
     private static void test11() {
         log.info("================");
+        log.info("================");
 
 
 
