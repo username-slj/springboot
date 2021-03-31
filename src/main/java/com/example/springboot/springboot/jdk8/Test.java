@@ -1,10 +1,7 @@
 package com.example.springboot.springboot.jdk8;
 
 import com.example.springboot.springboot.common.Utils;
-import com.example.springboot.springboot.jdk8.entity.A;
-import com.example.springboot.springboot.jdk8.entity.A2;
-import com.example.springboot.springboot.jdk8.entity.B;
-import com.example.springboot.springboot.jdk8.entity.MyEntity;
+import com.example.springboot.springboot.jdk8.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.core.util.JsonUtils;
 import org.springframework.beans.BeanUtils;
@@ -46,7 +43,8 @@ public class Test {
     }
 
     private static void test11() {
-
+//        AllArgsConstructorTest allArgsConstructorTest = new AllArgsConstructorTest("hzangsan","ss");
+        AllArgsConstructorTest allArgsConstructorTest = new AllArgsConstructorTest("","");
 
 
     }
