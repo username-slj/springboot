@@ -1,9 +1,12 @@
 package com.example.springboot.springboot.jdk8;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.springboot.springboot.common.Utils;
 import com.example.springboot.springboot.jdk8.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.core.util.JsonUtils;
+import org.assertj.core.util.Lists;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -39,19 +42,48 @@ public class Test {
 //        test09();
 //        对象转json
 //        test10();
-        test11();
+//        @Slf4j
+//        test11();
+        test12();
+    }
+
+    private static void test12() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("zhangsan", "张三");
+        jsonObject.put("list", "李四");
+        log.info(jsonObject.toString());
+
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(jsonObject);
+        log.info("====={}", jsonArray.toString());
     }
 
     private static void test11() {
-//        AllArgsConstructorTest allArgsConstructorTest = new AllArgsConstructorTest("hzangsan","ss");
-        AllArgsConstructorTest allArgsConstructorTest = new AllArgsConstructorTest("","");
+        ArrayList<A> arrayList = Lists.newArrayList();
+        ListsDTO listsDTO = new ListsDTO();
+        listsDTO.setA(arrayList);
+
+        A a = new A();
+        a.setName("aaa");
+        a.setStatus("01");
+        a.setUniqueNo(00L);
+        arrayList.add(a);
+
+        List<A> a1 = listsDTO.getA();
+        for(A alist: a1){
+            log.info("info==={},{},{}",alist.getName(),alist.getStatus(),alist.getUniqueNo());
+            log.debug("debug==={},{},{}",alist.getName(),alist.getStatus(),alist.getUniqueNo());
+            log.error("error===={},{},{}",alist.getName(),alist.getStatus(),alist.getUniqueNo());
+            log.warn("warn==={},{},{}",alist.getName(),alist.getStatus(),alist.getUniqueNo());
+            log.trace("trace==={},{},{}",alist.getName(),alist.getStatus(),alist.getUniqueNo());
+        }
 
 
     }
 
     private static void test10() {
         A a=new A();
-        a.setUniqueNo(111l);
+        a.setUniqueNo(111L);
         a.setName("zhangsan");
         System.out.println(Utils.objectToJson(null));
     }
@@ -60,7 +92,7 @@ public class Test {
         A a = new A();
         a.setName("lisi");
         a.setStatus("1");
-        a.setUniqueNo(000002l);
+        a.setUniqueNo(000002L);
         List<A> aList=new ArrayList<>();
         aList.add(a);
 
@@ -79,7 +111,7 @@ public class Test {
         A a = new A();
         a.setName("zhangsan");
         a.setStatus("2");
-        a.setUniqueNo(0000001l);
+        a.setUniqueNo(0000001L);
         A2 a2 = new A2();
         BeanUtils.copyProperties(a, a2);
         System.out.println("==="+a2.getName()+"==="+a2.getStatus()+"==="+a2.getUniqueNo());
@@ -200,32 +232,7 @@ public class Test {
         list.stream().forEach(item -> {
             System.out.println(item);
         });
-        Consumer<String> consumer = (str) -> System.out.println(str);
+        Consumer<String> consumer = System.out::println;
         consumer.accept("lisi");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
