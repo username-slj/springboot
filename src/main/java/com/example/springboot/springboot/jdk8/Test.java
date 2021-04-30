@@ -11,10 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 
 @Slf4j
@@ -44,7 +41,23 @@ public class Test {
 //        test10();
 //        @Slf4j
 //        test11();
-        test12();
+//        JSONObject---JSONArray
+//        test12();
+//        StringJoiner
+//        test13();
+        test14();
+    }
+
+    private static void test14() {
+    }
+
+    private static void test13() {
+        StringJoiner stringJoiner = new StringJoiner(",");
+        stringJoiner.add("aaa");
+        stringJoiner.add("bbb");
+        stringJoiner.add("ccc");
+        //aaa,bbb,ccc
+        log.info(stringJoiner.toString());
     }
 
     private static void test12() {
