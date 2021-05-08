@@ -12,11 +12,11 @@ public class Bubbling {
          * 入参：1, 3, 5, 6, 2, 4
          * 结果：1, 2, 3, 4, 5, 6
          */
-        int[] a = {1, 3, 5, 6, 2, 4};
-        method(a);
+        method(new int[]{1, 3, 5, 6, 2, 4});
     }
 
     public static void method(int[] param) {
+        System.out.println("入参:" + Arrays.toString(param));
         for (int i = 1; i <= param.length - 1; i++) {
             for (int j = 0; j < param.length - i; j++) {
                 if (param[j] > param[j + 1]) {
