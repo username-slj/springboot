@@ -20,7 +20,7 @@ public class DroolsTest {
     public void test01(){
         KieServices kieServices = KieServices.Factory.get();
         KieContainer kieContainer = kieServices.newKieClasspathContainer();
-        KieSession kieSession = kieContainer.newKieSession("person");
+        KieSession kieSession = kieContainer.newKieSession("ksession-person");
         Person person = new Person();
         person.setAge(1);
         kieSession.insert(person);
