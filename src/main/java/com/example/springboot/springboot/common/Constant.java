@@ -17,7 +17,13 @@ public class Constant {
     public static String QUEUE_WORK="queue_work";
     public static String QUEUE_WORK_MESSAGE="工作模式内容";
 
+    /**
+     * ACK消息确认
+     */
+    public static String QUEUE_ACK="queue_ack";
+    public static String QUEUE_ACK_MESSAGE="ACK模式内容";
 
     public static int FIGURE_1=1;
     public static int FIGURE_10=10;
+    public static String UTF_8="UTF-8";
 }
