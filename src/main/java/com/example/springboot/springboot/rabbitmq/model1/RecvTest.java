@@ -5,7 +5,6 @@ import com.example.springboot.springboot.common.RabbitMQUtils;
 import com.rabbitmq.client.CancelCallback;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
-import com.rabbitmq.client.Delivery;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
