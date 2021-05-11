@@ -6,5 +6,7 @@ package com.example.springboot.springboot.common;
  */
 public class Constant {
     public static String QUEUE_KEY="queue_key";
-    public static String QUEUE_VALUE="queue_value";
+    public static String QUEUE_MESSAGE="条消息";
+    public static int FIGURE_1=1;
+    public static int FIGURE_10=10;
 }
