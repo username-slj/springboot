@@ -1,0 +1,10 @@
+package rules.rule2;
+import com.example.springboot.springboot.drools.entity.Person;
+dialect  "mvel"
+
+rule "age2"
+    when
+        $person : Person(age > 10 , age <= 20)
+    then
+        System.out.println("这个人的年龄属于11-20岁");
+end
