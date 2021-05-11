@@ -21,19 +21,13 @@ public class RecvTest {
         Channel channel = RabbitMQUtils.getConnection();
         channel.queueDeclare(Constant.QUEUE_KEY, true, false, false, null);
         //收到消息后用来处理消息的回调对象
-        DeliverCallback callback = new DeliverCallback() {
-            @Override
-            public void handle(String s, Delivery message) throws IOException {
-                String msg = new String(message.getBody(), "UTF-8");
-                System.out.println("收到: " + msg);
-            }
+        DeliverCallback callback = (s, message) -> {
+            String msg = new String(message.getBody(), "UTF-8");
+            System.out.println("收到: " + msg);
         };
 
         //消费者取消时的回调对象
-        CancelCallback cancel = new CancelCallback() {
-            @Override
-            public void handle(String consumerTag) throws IOException {
-            }
+        CancelCallback cancel = consumerTag -> {
         };
         channel.basicConsume(Constant.QUEUE_KEY, true, callback, cancel);
     }
