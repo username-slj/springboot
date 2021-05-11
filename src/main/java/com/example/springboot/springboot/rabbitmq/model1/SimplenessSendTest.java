@@ -4,6 +4,7 @@ import com.example.springboot.springboot.common.Constant;
 import com.example.springboot.springboot.common.RabbitMQUtils;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.bcel.Const;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeoutException;
  * @author iybwb-shaolianjie
  */
 @Slf4j
-public class SendTest {
+public class SimplenessSendTest {
     public static void main(String[] args) throws IOException, TimeoutException {
         Channel channel = RabbitMQUtils.getConnection();
 
@@ -25,7 +26,7 @@ public class SendTest {
 //        exclusive: 排他,true表示限制仅当前连接可用
 //        autoDelete: 当最后一个消费者断开后,是否删除队列
 //        arguments: 其他参数
-        channel.queueDeclare(Constant.QUEUE_KEY, true, false, false, null);
+        channel.queueDeclare(Constant.QUEUE_SIMPLENESS, true, false, false, null);
 
         /*
          * 发布消息
@@ -39,8 +40,8 @@ public class SendTest {
          * 	-body: 消息内容byte[]数组
          */
         for (int i = Constant.FIGURE_1; i <= Constant.FIGURE_10; i++) {
-            channel.basicPublish("", Constant.QUEUE_KEY, null, String.valueOf("第" + i + "条消息").getBytes());
-            log.info("ProducerTest 已发送" + i + "条");
+            channel.basicPublish("", Constant.QUEUE_SIMPLENESS, null, String.valueOf("第" + i + Constant.QUEUE_SIMPLENESS_MESSAGE).getBytes());
+            log.info("ProducerTest 已发送" + i + "条"+Constant.QUEUE_SIMPLENESS_MESSAGE);
         }
         channel.close();
     }
