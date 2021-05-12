@@ -1,10 +1,9 @@
-package com.example.springboot.springboot.rabbitmq.model1;
+package com.example.springboot.springboot.rabbitmq.simpleness;
 
 import com.example.springboot.springboot.common.Constant;
 import com.example.springboot.springboot.common.RabbitMQUtils;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.bcel.Const;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;

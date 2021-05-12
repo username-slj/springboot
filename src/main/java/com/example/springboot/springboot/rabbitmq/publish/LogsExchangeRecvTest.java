@@ -1,33 +1,42 @@
-package com.example.springboot.springboot.rabbitmq.model1;
+package com.example.springboot.springboot.rabbitmq.publish;
 
 import com.example.springboot.springboot.common.Constant;
 import com.example.springboot.springboot.common.RabbitMQUtils;
 import com.rabbitmq.client.CancelCallback;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * 简单模式-消费者
+ * 发布/订阅
+ * 消费者
  *
  * @author iybwb-shaolianjie
  */
-public class SimplenessRecvTest {
-
+@Slf4j
+public class LogsExchangeRecvTest {
     public static void main(String[] args) throws IOException, TimeoutException {
         Channel channel = RabbitMQUtils.getConnection();
-        channel.queueDeclare(Constant.QUEUE_SIMPLENESS, true, false, false, null);
-        //收到消息后用来处理消息的回调对象
+        channel.exchangeDeclare(Constant.EXCHANGE_FANOUT, Constant.FANOUT);
+
+        //自动队列名
+        String queueName = channel.queueDeclare().getQueue();
+
+        //队列绑定到交换机
+        channel.queueBind(queueName, Constant.EXCHANGE_FANOUT, "");
+
         DeliverCallback callback = (s, message) -> {
-            String msg = new String(message.getBody(), "UTF-8");
-            System.out.println("收到: " + msg);
+            String msg = new String(message.getBody(), Constant.UTF_8);
+            log.info("收到: {}" ,msg);
         };
 
         //消费者取消时的回调对象
         CancelCallback cancel = consumerTag -> {
         };
-        channel.basicConsume(Constant.QUEUE_SIMPLENESS, true, callback, cancel);
+
+        channel.basicConsume(queueName, true, callback, cancel);
     }
 }

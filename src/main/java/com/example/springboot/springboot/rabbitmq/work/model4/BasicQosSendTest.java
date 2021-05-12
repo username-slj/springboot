@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.rabbitmq.model3;
+package com.example.springboot.springboot.rabbitmq.work.model4;
 
 import com.example.springboot.springboot.common.Constant;
 import com.example.springboot.springboot.common.RabbitMQUtils;
@@ -14,13 +14,14 @@ import java.util.concurrent.TimeoutException;
  * @author iybwb-shaolianjie
  */
 @Slf4j
-public class AckSendTest {
+public class BasicQosSendTest {
     public static void main(String[] args) throws IOException, TimeoutException {
         Channel channel = RabbitMQUtils.getConnection();
-        channel.queueDeclare(Constant.QUEUE_ACK, false, false, false, null);
+        //TODO 第二个参数是否持久化：false，true
+        channel.queueDeclare(Constant.QUEUE_BASICQOS, true, false, false, null);
 
-        channel.basicPublish("", Constant.QUEUE_ACK, null, Constant.QUEUE_ACK_MESSAGE.getBytes());
-        log.info("ACK生产消息结束");
+        channel.basicPublish("", Constant.QUEUE_BASICQOS, null, Constant.QUEUE_BASICQOS_MESSAGE.getBytes());
+        log.info("BasicQos生产消息结束");
         channel.close();
     }
 }

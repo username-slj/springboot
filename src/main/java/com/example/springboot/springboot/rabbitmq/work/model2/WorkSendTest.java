@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.rabbitmq.model2;
+package com.example.springboot.springboot.rabbitmq.work.model2;
 
 import com.example.springboot.springboot.common.Constant;
 import com.example.springboot.springboot.common.RabbitMQUtils;

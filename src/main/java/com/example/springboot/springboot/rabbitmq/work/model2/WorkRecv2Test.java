@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.rabbitmq.model3;
+package com.example.springboot.springboot.rabbitmq.work.model2;
 
 import com.example.springboot.springboot.common.Constant;
 import com.example.springboot.springboot.common.RabbitMQUtils;
@@ -11,18 +11,18 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * ACK消费者（消费后返回确认码，生产者确认后删除消息）
- * TODO 是关键代码
+ * 工作模式-消费者2
+ *
  * @author iybwb-shaolianjie
  */
 @Slf4j
-public class AckRecvTest {
+public class WorkRecv2Test {
     public static void main(String[] args) throws IOException, TimeoutException {
         Channel channel = RabbitMQUtils.getConnection();
-        channel.queueDeclare(Constant.QUEUE_ACK, false, false, false, null);
-        DeliverCallback callback = (s, message) -> {
-            String msg = new String(message.getBody(), Constant.UTF_8);
-            log.info("消费者1收到: " + msg);
+        channel.queueDeclare(Constant.QUEUE_WORK, false, false, false, null);
+        DeliverCallback deliverCallback = (s, message) -> {
+            String msg = new String(message.getBody(), "UTF-8");
+            log.info("消费者2收到: " + msg);
 
             for (int i = 0; i < msg.length(); i++) {
                 try {
@@ -30,15 +30,12 @@ public class AckRecvTest {
                 } catch (InterruptedException e) {
                 }
             }
-            log.info("消费者1处理结束");
-            //TODO 发送回执
-            channel.basicAck(message.getEnvelope().getDeliveryTag(), false);
+            log.info("消费者2处理结束");
         };
 
         //消费者取消时的回调对象
         CancelCallback cancel = consumerTag -> {
         };
-        //TODO autoAck设置为false,则需要手动确认发送回执
-        channel.basicConsume(Constant.QUEUE_ACK, false, callback, cancel);
+        channel.basicConsume(Constant.QUEUE_WORK, true, deliverCallback, cancel);
     }
 }
