@@ -1,4 +1,4 @@
-package com.example.springboot.springboot.rabbitmq.publish;
+package com.example.springboot.springboot.rabbitmq.route;
 
 import com.example.springboot.springboot.common.Constant;
 import com.example.springboot.springboot.common.RabbitMQUtils;
@@ -12,32 +12,32 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * 发布/订阅
- * 消费者
+ * 路由模式
+ * 生产者-交换机-（关键字匹配）队列-消费者
  *
  * @author iybwb-shaolianjie
  */
 @Slf4j
-public class LogsExchangeRecvTest {
+public class ErrorExchangeRecvTest {
     public static void main(String[] args) throws IOException, TimeoutException {
         Channel channel = RabbitMQUtils.getConnection();
-        channel.exchangeDeclare(Constant.EXCHANGE_FANOUT, BuiltinExchangeType.FANOUT);
+        channel.exchangeDeclare(Constant.EXCHANGE_DIRECT, BuiltinExchangeType.DIRECT);
 
-        //自动队列名
+        //队列名
         String queueName = channel.queueDeclare().getQueue();
+        //把队列绑定到交换机
+        channel.queueBind(queueName, Constant.EXCHANGE_DIRECT, Constant.EXCHANGE_DIRECT_ROUTINGKEY);
 
-        //队列绑定到交换机
-        channel.queueBind(queueName, Constant.EXCHANGE_FANOUT, "");
-
+        //回调
         DeliverCallback callback = (s, message) -> {
             String msg = new String(message.getBody(), Constant.UTF_8);
-            log.info("收到: {}" ,msg);
+            String routingKey = message.getEnvelope().getRoutingKey();
+            log.info("收到: {}-{}", routingKey, msg);
         };
 
         //消费者取消时的回调对象
         CancelCallback cancel = consumerTag -> {
         };
-
-        channel.basicConsume(queueName, true, callback, cancel);
+        channel.basicConsume(queueName, false, callback, cancel);
     }
 }

@@ -33,16 +33,16 @@ public class Constant {
      * 发布/订阅
      */
     public static String EXCHANGE_FANOUT="logs";
-    public static String EXCHANGE_FANOUT_MESSSAGE="发布/订阅内容";
-
+    public static String EXCHANGE_FANOUT_MESSSAGE="发布/订阅模式消息内容";
 
     /**
-     * 交换类型:direct、topic、header、fanout
+     * 路由模式
      */
-    public static String DIRECT="direct";
-    public static String TOPIC="topic";
-    public static String HEADER="header";
-    public static String FANOUT="fanout";
+    public static String EXCHANGE_DIRECT="direct";
+    public static String EXCHANGE_DIRECT_ROUTINGKEY="routekey";
+    public static String EXCHANGE_DIRECT_MESSSAGE="路由模式消息内容";
+
+
     public static int FIGURE_1=1;
     public static int FIGURE_10=10;
     public static String UTF_8="UTF-8";

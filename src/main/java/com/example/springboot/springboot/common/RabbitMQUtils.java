@@ -1,8 +1,12 @@
 package com.example.springboot.springboot.common;
 
+import com.rabbitmq.client.CancelCallback;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
+import com.rabbitmq.client.Delivery;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -10,6 +14,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * @author iybwb-shaolianjie
  */
+@Slf4j
 public class RabbitMQUtils {
 
     public static Channel getConnection() throws IOException, TimeoutException {
