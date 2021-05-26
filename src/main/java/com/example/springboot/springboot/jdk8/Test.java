@@ -13,15 +13,22 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Slf4j
 public class Test {
+    private static final String PHONE = "^1[3-9]\\d{9}$";
+    private static final String ACCOUNT = "^([1-9]\\d*\\d*)$";
+
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         //->写法
 //        test1();
@@ -55,12 +62,35 @@ public class Test {
 //        test14();
 //        CompletableFuture.supplyAsync:异步执行完main在可以执行
 //        test15();
-        test16();
+//        替换{name}
+//        test16();
+        test18();
+    }
+
+    private static void test18() {
     }
 
     private static void test16() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("sdfkslj建设路口{name}稍等");
+        sb.append("sdfkslj建设路口{age}稍等");
+        HashMap hashMap = new HashMap();
+        hashMap.put("name", "zhangsan");
+        hashMap.put("age", 20);
+        String result = test17(sb.toString(), hashMap);
+        log.info("result==={}", result);
+    }
 
-
+    public static String test17(String template, Map params) {
+        StringBuffer sb = new StringBuffer();
+        Matcher m = Pattern.compile("\\{\\w+\\}").matcher(template);
+        while (m.find()) {
+            String param = m.group();
+            Object value = params.get(param.substring(1, param.length() - 1));
+            m.appendReplacement(sb, value == null ? "" : value.toString());
+        }
+        m.appendTail(sb);
+        return sb.toString();
     }
 
     private static void test15() throws ExecutionException, InterruptedException {
