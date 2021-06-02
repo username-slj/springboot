@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.springboot.springboot.common.Utils;
 import com.example.springboot.springboot.jdk8.entity.A;
+import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.A2;
 import com.example.springboot.springboot.jdk8.entity.ListsDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -68,6 +69,31 @@ public class Test {
     }
 
     private static void test18() {
+        A a = new A();
+        a.setUniqueNo(001L);
+        a.setStatus("001");
+        a.setName("zhangsan");
+
+        B b = Utils.copyObject(a, B.class);
+        log.info("{}={}", b.getUniqueNo(), b.getStatus());
+
+    }
+
+    public static void test19() {
+        log.info("这是test19方法");
+        try {
+            throw new NullPointerException();
+        } catch (Exception e) {
+            log.error("test19 err", e);
+        }
+
+    }
+
+    public static void test20() {
+
+        log.info("这是test20方法");
+
+
     }
 
     private static void test16() {

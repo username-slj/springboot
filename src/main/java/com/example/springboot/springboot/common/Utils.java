@@ -3,13 +3,17 @@ package com.example.springboot.springboot.common;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonNull;
+import net.sf.cglib.beans.BeanCopier;
 import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Utils {
     public static final String DATE_LONG_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static Map<String, BeanCopier> map = new HashMap<>();
 
     /**
      * 日期转字符串
@@ -40,4 +44,36 @@ public class Utils {
         return gson.toJson(object);
     }
 
+    /**
+     * 对象复制
+     * @param obj1 被复制对象，为空会抛出异常
+     * @param classz 复制类型
+     * @param <T>
+     * @return
+     */
+    public static <T> T copyObject(Object obj1, Class<T> classz) {
+        if (obj1 == null || classz == null) {
+            throw new IllegalArgumentException("复制对象或者被复制类型为空!");
+        }
+        T obj2 = null;
+        try {
+            obj2 = classz.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        String name = getClassName(obj1.getClass(), classz);
+        BeanCopier beanCopier;
+        if (map.containsKey(name)) {
+            beanCopier = map.get(name);
+        } else {
+            beanCopier = BeanCopier.create(obj1.getClass(), classz, false);
+            map.put(name, beanCopier);
+        }
+        beanCopier.copy(obj1, obj2, null);
+        return obj2;
+    }
+
+    private static String getClassName(Class<?> class1, Class<?> class2) {
+        return class1.getName() + class2.getName();
+    }
 }
