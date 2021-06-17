@@ -6,6 +6,7 @@ import com.google.gson.JsonNull;
 import net.sf.cglib.beans.BeanCopier;
 import org.springframework.util.StringUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,6 +29,19 @@ public class Utils {
             return simpleDateFormat.format(date);
         }
         return "";
+    }
+
+    public static Date formatStringToDate(String date, String format){
+        if(StringUtils.isEmpty(date)){
+            return null;
+        }
+        SimpleDateFormat sdf=new SimpleDateFormat(Utils.DATE_LONG_FORMAT);
+        try {
+            return sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

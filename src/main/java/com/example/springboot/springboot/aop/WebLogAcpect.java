@@ -43,7 +43,7 @@ public class WebLogAcpect {
      * 环绕通知必须返回，如果不返回导致url返回的信息为空
      *
      * @param joinPoint 代理入参
-     * @return 返回西悉尼
+     * @return 返回信息
      * @throws Throwable 异常
      */
     @Around("webLog()")

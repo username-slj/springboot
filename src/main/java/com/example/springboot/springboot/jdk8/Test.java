@@ -1,19 +1,25 @@
 package com.example.springboot.springboot.jdk8;
 
+import cn.hutool.core.date.DateUtil;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.springboot.springboot.common.Utils;
 import com.example.springboot.springboot.jdk8.entity.A;
-import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.A2;
+import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.ListsDTO;
+import com.example.springboot.springboot.jdk8.entity.RiskUserRep;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
+import org.drools.core.util.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +30,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class Test {
@@ -65,7 +72,66 @@ public class Test {
 //        test15();
 //        替换{name}
 //        test16();
-        test18();
+        //cglib copy
+//        test18();
+        //jsonArray转list
+//        test21();
+        test22();
+    }
+
+    private static void test22() {
+
+    }
+
+    private static void test21() {
+        JSONArray jsonArray = new JSONArray();
+
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject1.put("gmtModified", "2021-05-27 00:00:01");
+        jsonObject1.put("accountId", "001");
+        JSONObject jsonObject2 = new JSONObject();
+        jsonObject2.put("gmtModified", "2021-05-27 00:00:02");
+        jsonObject2.put("accountId", "001");
+        JSONObject jsonObject3 = new JSONObject();
+        jsonObject3.put("gmtModified", "2021-05-27 18:58:35");
+        jsonObject3.put("accountId", "002");
+        JSONObject jsonObject4 = new JSONObject();
+        jsonObject4.put("gmtModified", "2021-05-27 18:58:30");
+        jsonObject4.put("accountId", "003");
+        JSONObject jsonObject5 = new JSONObject();
+        jsonObject5.put("gmtModified", "2021-05-27 00:00:07");
+        jsonObject5.put("accountId", "001");
+
+        jsonArray.add(jsonObject1);
+        jsonArray.add(jsonObject2);
+        jsonArray.add(jsonObject3);
+        jsonArray.add(jsonObject4);
+        jsonArray.add(jsonObject5);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code", "0");
+        jsonObject.put("message", "success");
+        jsonObject.put("userList", jsonArray);
+
+        log.info("json数组={}", JSON.toJSONString(jsonObject));
+
+        List<RiskUserRep> list = JSONArray.parseArray(jsonArray.toString(), RiskUserRep.class);
+        List<RiskUserRep> listResult = new ArrayList<>();
+
+        Map<String, List<RiskUserRep>> groupMap = list.stream().collect(Collectors.groupingBy(a -> a.getAccountId()));
+        groupMap.forEach((a, b) -> {
+            if (b.size() > 1) { //说明是重复数据,进行排序取出最新一个
+                Optional<RiskUserRep> collect = b.stream()
+                        .sorted((obj1, obj2) -> -DateUtil.compare(obj1.getGmtModified(), obj2.getGmtModified()))
+                        .findFirst();
+                listResult.add(collect.get());
+            } else {
+                    listResult.add(b.get(0));
+            }
+        });
+        for (RiskUserRep result : listResult) {
+            log.info("==={}---{}", result.getAccountId(), Utils.formatDateToString(result.getGmtModified(), Utils.DATE_LONG_FORMAT));
+        }
     }
 
     private static void test18() {
