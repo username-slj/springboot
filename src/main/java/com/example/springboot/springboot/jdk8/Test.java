@@ -10,6 +10,7 @@ import com.example.springboot.springboot.jdk8.entity.A2;
 import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.ListsDTO;
 import com.example.springboot.springboot.jdk8.entity.RiskUserRep;
+import com.google.common.base.Joiner;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
 import org.drools.core.util.DateUtils;
@@ -54,7 +55,7 @@ public class Test {
 //        test06();
 //          字符串内存模型
 //        test07();
-//        BeanUtils.copyProperties
+//        BeanUtils.copyProperties:spirng包，copy会把空值的字段过滤
 //        test08();
 //        list(BO)转List(BO):硬编码
 //        test09();
@@ -76,11 +77,11 @@ public class Test {
 //        test18();
         //jsonArray转list
 //        test21();
-        test22();
+//        test22();
     }
 
     private static void test22() {
-
+//        new A();
     }
 
     private static void test21() {
@@ -300,7 +301,7 @@ public class Test {
     private static void test08() {
         A a = new A();
         a.setName("zhangsan");
-        a.setStatus("2");
+        a.setStatus("");
         a.setUniqueNo(0000001L);
         A2 a2 = new A2();
         BeanUtils.copyProperties(a, a2);
