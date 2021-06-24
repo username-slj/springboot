@@ -1,6 +1,5 @@
 package com.example.springboot.springboot.jdk8;
 
-import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -9,18 +8,13 @@ import com.example.springboot.springboot.jdk8.entity.A;
 import com.example.springboot.springboot.jdk8.entity.A2;
 import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.ListsDTO;
-import com.example.springboot.springboot.jdk8.entity.RiskUserRep;
-import com.google.common.base.Joiner;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
-import org.drools.core.util.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +25,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Slf4j
 public class Test {
@@ -77,11 +70,58 @@ public class Test {
 //        test18();
         //jsonArray转list
 //        test21();
-//        test22();
+//        去除json不需要的字段
+//        test23();
+        test24();
     }
 
-    private static void test22() {
-//        new A();
+    private static void test24() {
+
+
+    }
+
+    private static void test23() {
+
+        String str = "{\n" +
+                "  \"policyList\": [\n" +
+                "    {\n" +
+                "      \"id\": \"001\",\n" +
+                "      \"name\": \"zhangsan\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": \"002\",\n" +
+                "      \"name\": \"lisi\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": \"003\",\n" +
+                "      \"name\": \"wangwu\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        JSONObject jsonObject = test22(str, "policyList", "id");
+        log.info("{}", jsonObject);
+    }
+
+    /**
+     * 去除不需要的字段
+     *
+     * @param jsonStr   原始json
+     * @param arrStr    去除的目标集合
+     * @param removeStr 去除的字段名
+     * @return 删除后的新json
+     */
+    private static JSONObject test22(String jsonStr, String arrStr, String removeStr) {
+        JSONArray jsonArrayResult = new JSONArray();
+        JSONObject jsonObject = JSON.parseObject(jsonStr);
+        JSONArray jsonArray = (JSONArray) jsonObject.get(arrStr);
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonResultData = (JSONObject) jsonArray.get(i);
+            jsonResultData.remove(removeStr);
+            jsonArrayResult.add(jsonResultData);
+        }
+        JSONObject jsonObjectResult = new JSONObject();
+        jsonObjectResult.put(arrStr, jsonArrayResult);
+        return jsonObjectResult;
     }
 
     private static void test21() {
@@ -116,23 +156,7 @@ public class Test {
 
         log.info("json数组={}", JSON.toJSONString(jsonObject));
 
-        List<RiskUserRep> list = JSONArray.parseArray(jsonArray.toString(), RiskUserRep.class);
-        List<RiskUserRep> listResult = new ArrayList<>();
 
-        Map<String, List<RiskUserRep>> groupMap = list.stream().collect(Collectors.groupingBy(a -> a.getAccountId()));
-        groupMap.forEach((a, b) -> {
-            if (b.size() > 1) { //说明是重复数据,进行排序取出最新一个
-                Optional<RiskUserRep> collect = b.stream()
-                        .sorted((obj1, obj2) -> -DateUtil.compare(obj1.getGmtModified(), obj2.getGmtModified()))
-                        .findFirst();
-                listResult.add(collect.get());
-            } else {
-                    listResult.add(b.get(0));
-            }
-        });
-        for (RiskUserRep result : listResult) {
-            log.info("==={}---{}", result.getAccountId(), Utils.formatDateToString(result.getGmtModified(), Utils.DATE_LONG_FORMAT));
-        }
     }
 
     private static void test18() {
