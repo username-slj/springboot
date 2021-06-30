@@ -1,5 +1,6 @@
 package com.example.springboot.springboot.jdk8;
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -8,23 +9,35 @@ import com.example.springboot.springboot.jdk8.entity.A;
 import com.example.springboot.springboot.jdk8.entity.A2;
 import com.example.springboot.springboot.jdk8.entity.B;
 import com.example.springboot.springboot.jdk8.entity.ListsDTO;
+import com.example.springboot.springboot.jdk8.entity.RiskUserRep;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
+import org.drools.core.util.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 import java.util.StringJoiner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class Test {
@@ -72,11 +85,126 @@ public class Test {
 //        test21();
 //        去除json不需要的字段
 //        test23();
-        test24();
+        //stream 常用方法
+//        test24();
+        //LocalDateTime
+//        test25();
+        //重复去除后获取最新日期一条
+//        test26();
+        //去除两个集合重复信息
+//        test27();
+        test28();
+    }
+
+    private static void test28() {
+
+
+
+    }
+
+    private static void test27() {
+        List<String> data1 = new ArrayList<>();
+        data1.add("1");
+        data1.add("2");
+
+        List<String> data2 = new ArrayList<>();
+        data2.add("2");
+        data2.add("1");
+        data2.add("3");
+        data2.add("4");
+        data2.add("5");
+
+        List<String> result = data2.stream()
+                .filter(d1 ->
+                        data1.stream()
+                                .noneMatch(d2 -> Objects.equals(d1, d2))
+                ).collect(Collectors.toList());
+        System.out.println(result);
+
+
+    }
+
+    private static void test26() {
+        ArrayList<RiskUserRep> list = new ArrayList<>();
+        ArrayList<RiskUserRep> listResult = new ArrayList<>();
+
+        RiskUserRep rep1 = new RiskUserRep();
+        rep1.setAccountId(222L);
+        rep1.setType("1");
+        rep1.setGmtModified(Utils.formatStringToDate("2021-06-06 12:00:00", Utils.DATE_LONG_FORMAT));
+
+        RiskUserRep rep2 = new RiskUserRep();
+        rep2.setAccountId(222L);
+        rep2.setType("2");
+        rep2.setGmtModified(Utils.formatStringToDate("2021-06-16 12:00:00", Utils.DATE_LONG_FORMAT));
+        list.add(rep1);
+        list.add(rep2);
+        log.info("list={}", JSON.toJSONString(list));
+
+        Map<String, List<RiskUserRep>> groupMap = list.stream().collect(Collectors.groupingBy(a -> a.getAccountId().toString()));
+        groupMap.forEach((a, b) -> {
+            if (b.size() > 1) { //说明是重复数据,进行排序取出最新一个
+                Optional<RiskUserRep> collect = b.stream().min((obj1, obj2) -> -DateUtil.compare(obj1.getGmtModified(), obj2.getGmtModified()));
+//                Optional<RiskUserRep> collect = b.stream().sorted((obj1, obj2) -> -DateUtil.compare(obj1.getGmtModified(), obj2.getGmtModified())).findAny();
+                listResult.add(collect.get());
+            } else {
+                listResult.add(b.get(0));
+            }
+        });
+        log.info("listResult={}", JSON.toJSONString(listResult));
+    }
+
+    private static void test25() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        System.out.println("当前时间: " + currentTime);
+        LocalDate date1 = currentTime.toLocalDate();
+        System.out.println("date1: " + date1);
+        Month month = currentTime.getMonth();
+        int day = currentTime.getDayOfMonth();
+        int seconds = currentTime.getSecond();
+        System.out.println("月: " + month + ", 日: " + day + ", 秒: " + seconds);
+        LocalDateTime date2 = currentTime.withDayOfMonth(10).withYear(2012);
+        System.out.println("date2: " + date2);
+        // 12 december 2014
+        LocalDate date3 = LocalDate.of(2014, Month.DECEMBER, 12);
+        System.out.println("date3: " + date3);
+        // 22 小时 15 分钟
+        LocalTime date4 = LocalTime.of(22, 15);
+        System.out.println("date4: " + date4);
+        // 解析字符串
+        LocalTime date5 = LocalTime.parse("20:15:30");
+        System.out.println("date5: " + date5);
+
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse("2015-12-03T10:15:30+05:30[Asia/Shanghai]");
+        System.out.println("date1: " + zonedDateTime);
+        ZoneId id = ZoneId.of("Europe/Paris");
+        System.out.println("ZoneId: " + id);
+        ZoneId currentZone = ZoneId.systemDefault();
+        System.out.println("当期时区: " + currentZone);
     }
 
     private static void test24() {
+        Random random = new Random();
+        log.info("forEach 输出了10个随机数:");
+        random.ints().limit(10).forEach(System.out::println);
 
+        List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+        List<Integer> squaresList = numbers.stream().map(i -> i * i).distinct().collect(Collectors.toList());
+        log.info("map 获取对应的平方数={}", squaresList);
+
+        List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
+        int count = (int) strings.stream().filter(string -> string.isEmpty()).count();
+        log.info("filter 获取空字符串的数量={}", count);
+
+        log.info("forEach 输出了5个随机数:");
+        random.ints().limit(5).forEach(System.out::println);
+
+        log.info("sorted 方法对输出的 10 个随机数进行排序:");
+        random.ints().limit(4).sorted().forEach(System.out::println);
+
+
+        int count2 = (int) strings.parallelStream().filter(string -> string.isEmpty()).count();
+        log.info("parallel 并行获取空字符串的数量={}", count2);
 
     }
 
